@@ -18,4 +18,7 @@ These are the tools used to conduct this research and development.
 
 ## Topics
  1. Basic Classes
+
  2. Login System
+ * Used reset css to keep styling consitent accross browsers as referenced at https://css-tricks.com/an-interview-with-elad-shechter-on-the-new-css-reset/#top-of-site.
+ * Used Google fonts at https://fonts.google.com/specimen/Roboto.
