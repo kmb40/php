@@ -1,9 +1,21 @@
 # php
-### R and D with PHP
+PHP Research and Development
 
-### Environement
-1. Installed PHP using homebrew using instructions at https://www.php.net/manual/en/install.macosx.packages.php 
-2. Installed VsCode extenions referenced at https://www.youtube.com/watch?v=zT6QrGIfXaU 
+# Objective    
+The purpose of this repo is research and development with PHP. 
 
+# Environment and Preparation used for this event   
+These are the tools used to conduct this research and development. 
+
+## Hardware
+* Macbook - MacOS Ventura 13.4.2
+
+## Software
+1. VS Code - Version: 1.82.0-insider (Note: all references to the command line refer to the VSCode command line unless otherwise noted) (Optional).
+
+2. Installed PHP using homebrew using instructions at https://www.php.net/manual/en/install.macosx.packages.php 
+3. Installed VsCode extenions referenced at https://www.youtube.com/watch?v=zT6QrGIfXaU 
+
+## Topics
  1. Basic Classes
  2. Login System
