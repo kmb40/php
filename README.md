@@ -15,6 +15,7 @@ These are the tools used to conduct this research and development.
 
 2. Installed PHP using homebrew using instructions at https://www.php.net/manual/en/install.macosx.packages.php 
 3. Installed VsCode extenions referenced at https://www.youtube.com/watch?v=zT6QrGIfXaU 
+4. Installed MAMP (https://www.mamp.info/en/mamp/mac/) for the database. This could have been used for PHP as well instead of installing PHP in step 1.
 
 ## Topics
  1. Basic Classes
