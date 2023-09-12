@@ -34,9 +34,9 @@ if (isset($_POST["submit"])) {// Validate if the login form was used to reach th
         header("location: ../signup.php?error=passwordsdontmatch");
         exit(); // Stops the script from running
     }
-    // If username already exists redirect to signup page with an error attached
-    if (uidExists($conn, $username) !== false ) {
-        header("location: ../signup.php?error=usernametaken");
+    // If username or email already exists redirect to signup page with an error attached
+    if (uidExists($conn, $username, $email) !== false ) {
+        header("location: ../signup.php?error=usernameormemailtaken");
         exit(); // Stops the script from running
     }
 
