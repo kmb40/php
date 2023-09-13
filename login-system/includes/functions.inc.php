@@ -59,8 +59,8 @@ else {
 
 // If username or email already exists redirect to signup page with an error attached
 function uidExists($conn, $username, $email) {
-    $sql = "SELECT * FROM users WHERE userUid = ? OR usersEmail = ?;";// Query database for username and password
-    $stmt = mysqli_init($conn); // Initializes prepated statement
+    $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";// Query database for username and password
+    $stmt = mysqli_stmt_init($conn); // Initializes prepated statement
     if (!mysqli_stmt_prepare($stmt, $sql)) {
     header("location: ../signup.php?error=stmtfailed");     
     exit();   
@@ -91,15 +91,16 @@ function uidExists($conn, $username, $email) {
 }//End of function
 
 // If username or email does not already exists, create / insert into the database
-function createUser($conn, $username, $email) {
+function createUser($conn, $name, $email, $username, $pwd) {
     $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";// Insert new user into database
-    $stmt = mysqli_init($conn); // Initializes prepated statement
+    $stmt = mysqli_stmt_init($conn); // Initializes prepated statement
     if (!mysqli_stmt_prepare($stmt, $sql)) {
     header("location: ../signup.php?error=stmtfailed");     
     exit();   
 
     }
     // Encrypt the password
+    //$pwd = '';
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
     //Binds parameters to the prepared statement stmt
