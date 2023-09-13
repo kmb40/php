@@ -1,9 +1,9 @@
 <?php
 
 //Declare database variables
-$serverName = "localhost:8888";
+$serverName = "localhost:8889";
 $dbUserName = "root";
-$dbPassword = "";
+$dbPassword = "root";
 $dbName = "loginsystem";
 
 // Assign db connection to a variable "conn".

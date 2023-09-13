@@ -66,10 +66,53 @@ function uidExists($conn, $username, $email) {
     exit();   
 
     }
-    //
+    //Binds parameters to the prepared statement stmt
     mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+    
+    //Execute the statement
     mysqli_stmt_execute($stmt);
 
+    // Returns data if exists 
     $resultData = mysqli_stmt_get_result($stmt);
+
+    // Check to see if any data gets returned 
+    if ($row = mysqli_fetch_assoc($resultData)) {
+      // Return all of the data if the user exists
+      return $row;
+    }
+
+    else {
+      // If this function fails to return a match, then return a value of false
+      $result = false;
+      return $result;
+    }
+    // Clost the prepared statement 
+    mysqli_stmt_close($stmt);
+}//End of function
+
+// If username or email does not already exists, create / insert into the database
+function createUser($conn, $username, $email) {
+    $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";// Insert new user into database
+    $stmt = mysqli_init($conn); // Initializes prepated statement
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+    header("location: ../signup.php?error=stmtfailed");     
+    exit();   
+
+    }
+    // Encrypt the password
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+    //Binds parameters to the prepared statement stmt
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
+    
+    //Execute the statement
+    mysqli_stmt_execute($stmt);
+
+    // Clost the prepared statement 
+    mysqli_stmt_close($stmt);
+    
+    // Send the user with the new account to signup page with no error
+    header("location: ../signup.php?error=none");     
+    exit(); 
 
 }//End of function

@@ -9,7 +9,7 @@ if (isset($_POST["submit"])) {// Validate if the login form was used to reach th
     $pwd = $_POST["pwd"];
     $pwdRepeat = $_POST["pwdrepeat"];
 
-    require_once 'dbh.inc.php';    
+    require_once 'dba.inc.php';    
 
     // Error hanlding and other functions
     require_once 'functions.inc.php'; 
