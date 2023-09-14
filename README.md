@@ -13,13 +13,10 @@ These are the tools used to conduct this research and development.
 ## Software
 1. VS Code - Version: 1.82.0-insider (Note: all references to the command line refer to the VSCode command line unless otherwise noted) (Optional).
 
-2. Installed PHP using homebrew using instructions at https://www.php.net/manual/en/install.macosx.packages.php 
+2. Installed PHP - **Verison 8.2** - using homebrew using instructions at https://www.php.net/manual/en/install.macosx.packages.php 
 3. Installed VsCode extenions referenced at https://www.youtube.com/watch?v=zT6QrGIfXaU 
-4. Installed MAMP (https://www.mamp.info/en/mamp/mac/) for the database. This could have been used for PHP as well instead of installing PHP in step 1.
+4. Installed MAMP (https://www.mamp.info/en/mamp/mac/) for the mySQL database **Version 5.3.79**. This could have been used for PHP as well instead of installing PHP in step 1.
 
 ## Topics
  1. Basic Classes
-
- 2. Login System
- * Used reset css to keep styling consitent accross browsers as referenced at https://css-tricks.com/an-interview-with-elad-shechter-on-the-new-css-reset/#top-of-site.
- * Used Google fonts at https://fonts.google.com/specimen/Roboto.
+ 2. [Login System](/docs/login-system.md)
