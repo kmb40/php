@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST["submit"])) {// Validate if the login form was used to reach this page, if not redirect to signup page
+if (isset($_POST["submit"])) {// Validate if the login form was used to reach this page, if not redirect to signup.php page
 
     //echo "It works"; // Test the isset function
     $name = $_POST["name"];
@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {// Validate if the login form was used to reach th
 
     require_once 'dba.inc.php';    
 
-    // Error hanlding and other functions
+    // Error handling and other functions
     require_once 'functions.inc.php'; 
 
     // If any input fields are empty redirect user to signup page with an error attached to the url

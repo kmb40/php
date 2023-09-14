@@ -90,6 +90,14 @@ function uidExists($conn, $username, $email) {
     mysqli_stmt_close($stmt);
 }//End of function
 
+// If any input fields are empty "result" equals true
+function emptyInputLogin($username, $pwd) {
+  // If any of these values are empty, "result" equals true
+  if (empty($username) || empty($pwd)) {
+  $result = true;
+  } 
+}
+
 // If username or email does not already exists, create / insert into the database
 function createUser($conn, $name, $email, $username, $pwd) {
     $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";// Insert new user into database
@@ -116,4 +124,14 @@ function createUser($conn, $name, $email, $username, $pwd) {
     header("location: ../signup.php?error=none");     
     exit(); 
 
+    // Log the user into the system
+    // Describe here
+    function loginUser($conn, $username, $pwd) {
+      $uidExists = uidExists($conn, $username, $$username);
+
+      if ($uidExists === false) {
+        header("location: ../login.php?error=wronglogin");     
+        exit(); 
+    }
+  }
 }//End of function
