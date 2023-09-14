@@ -10,6 +10,13 @@
 ***
 ### Issues
 #### Issue
+* On form submission returns two failure to connect to database error type.[Ref File](/login-system/includes/dba.inc.php), [Commit](https://github.com/kmb40/php/commit/27da2b583f49c94e926eba41d77cbc6835e9e793)
+
+#### Resolution
+* Use port 8889 for MAMP mySQL port.  
+* Use password "root".
+***
+#### Issue
 * On form submission returns "Fatal error: Uncaught ArgumentCountError: mysqli_init() expects exactly 0 arguments, 1 given".[Ref File](/login-system/includes/functions.inc.php), [Commit](https://github.com/kmb40/php/commit/560dda1d427e62cba2ddb156c25e29251ad8742f)
 
 #### Resolution
