@@ -24,11 +24,11 @@
                 
                 <?php
                     // Illustrate links that reflect logged in vs not logged in
-                    if (isset($_SESSION["useruid"])){ // Check if a session exists with a userid.
+                    if (isset($_SESSION["useruid"])){ // Check if a session exists with a useruid. If so, display profile and log out options on nav
                         echo "<li><a href='profile.php'>Profile Page</a></l1>";
                         echo "<li><a href='includes/logout.inc.php'>Log Out</a></l1>";
                     }
-                    else {
+                    else {// If a session does not exists with a useruid, continue to display sign up and log in options on nav
                         echo "<li><a href='signup.php'>Sign Up</a></li>";
                         echo "<li><a href='login.php'>Log In</a></li>";
                     }

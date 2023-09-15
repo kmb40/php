@@ -22,3 +22,9 @@
 #### Resolution
 * Replace mysqli_init with mysqli_stmt_init. mysqli_init is deprecated and does not use paramaters.  
 ***
+#### Issue
+* After Sign in, logged expereince did not exist. Such as displaying navigation items specific to logged in users.[Ref File](/login-system/header.php ), [Commit](https://github.com/kmb40/php/commit/391325c960749964c5d4b7037dba7443507f6c98?diff=unified#diff-69573dac8a3e18a9599e0fe81128f2f6cdd89bac8107247fdb0a37d1013e8e82)
+
+#### Resolution
+* Replaced "$_SESSION["userid"]" with $_SESSION["useruid"]
+***
