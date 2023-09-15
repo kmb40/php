@@ -153,3 +153,6 @@ function createUser($conn, $name, $email, $username, $pwd) {
     }
   }
 }//End of function
+
+// Illustrate links that reflect logged in vs not logged in
+// User logged in wrong errors
