@@ -127,11 +127,29 @@ function createUser($conn, $name, $email, $username, $pwd) {
     // Log the user into the system
     // Describe here
     function loginUser($conn, $username, $pwd) {
-      $uidExists = uidExists($conn, $username, $$username);
+      $uidExists = uidExists($conn, $username, $username);// Assign the uidExists function and paramters to variable uidExist
 
+      // If uidExists parameters failed to populate then throw error and redirect to login
       if ($uidExists === false) {
         header("location: ../login.php?error=wronglogin");     
         exit(); 
+    }
+    
+    // Check the password supplied at login against the password stored in the db correlated to the provided username
+    $pwdHashed = $uidExists["usersPwd"]; //Check existing pwd
+    $checkPwd = password_verify($pwd, $pwdHashed); // Compare provided password with existing password
+  
+    if ($checkPwd === false) {
+      header("location: ../login.php?error=wrongpassword");     
+      exit(); 
+
+    }
+    else if ($checkPwd === true) {
+     session_start(); // Start a login session
+     $_SESSION["userid"] = $uidExists["usersid"]; //Create super globals variable for session
+     $_SESSION["useruid"] = $uidExists["usersUid"]; //Create super globals variable for session
+     header("location: ../index.php"); // Send logged in user to home page    
+     exit(); 
     }
   }
 }//End of function
