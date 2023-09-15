@@ -1,3 +1,7 @@
+<?php
+    session_start(); // Start a session so that logged in users can be recognized on every page
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +21,18 @@
                     <li><a href="index.php">Home</a></li>
                     <li><a href="discover.php">About Us</a></li>
                     <li><a href="blog.php">Blog</a></li>
-                    <li><a href="signup.php">Sign Up</a></li>
-                    <li><a href="login.php">Log In</a></li>
+                
+                <?php
+                    // Illustrate links that reflect logged in vs not logged in
+                    if (isset($_SESSION["useruid"])){ // Check if a session exists with a userid.
+                        echo "<li><a href='profile.php'>Profile Page</a></l1>";
+                        echo "<li><a href='includes/logout.inc.php'>Log Out</a></l1>";
+                    }
+                    else {
+                        echo "<li><a href='signup.php'>Sign Up</a></li>";
+                        echo "<li><a href='login.php'>Log In</a></li>";
+                    }
+                ?>
                 </ul>
             </div>
         </nav>

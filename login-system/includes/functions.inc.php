@@ -92,10 +92,15 @@ function uidExists($conn, $username, $email) {
 
 // If any input fields are empty "result" equals true
 function emptyInputLogin($username, $pwd) {
+  $result = ""; // declare the var
   // If any of these values are empty, "result" equals true
   if (empty($username) || empty($pwd)) {
   $result = true;
   } 
+  else {
+    $result = false;
+  }
+  return $result;
 }
 
 // If username or email does not already exists, create / insert into the database
@@ -123,7 +128,7 @@ function createUser($conn, $name, $email, $username, $pwd) {
     // Send the user with the new account to signup page with no error
     header("location: ../signup.php?error=none");     
     exit(); 
-
+  }
     // Log the user into the system
     // Describe here
     function loginUser($conn, $username, $pwd) {
@@ -151,8 +156,4 @@ function createUser($conn, $name, $email, $username, $pwd) {
      header("location: ../index.php"); // Send logged in user to home page    
      exit(); 
     }
-  }
-}//End of function
-
-// Illustrate links that reflect logged in vs not logged in
-// User logged in wrong errors
+  }//End of function
