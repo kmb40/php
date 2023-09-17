@@ -1,4 +1,5 @@
 <?php
+// Establishes a connection to the database
 
 //Declare database variables
 $serverName = "localhost:8889";
