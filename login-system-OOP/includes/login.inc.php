@@ -2,23 +2,19 @@
 
 if (isset($_POST["submit"])) {// Validate if the login form was used to reach this page, if not redirect to login.php page
 
-    $username = $_POST["uid"];
+    $uid = $_POST["uid"];
     $pwd = $_POST["pwd"];
    
-    // Database connectivity handling
-    require_once 'dba.inc.php';    
+    // Instantiate loginContr class at signup-contr-classes.php 
+    include "../classes/dbh.classes.php"; // Include this file
+    include "../classes/login.classes.php"; //Include this file
+    include "../classes/login-contr.classes.php"; //Include this file
+    $login = new LoginContr($uid, $pwd); //Assign a new instance of the object to variable $signup
 
-    // Error hanlding and other functions
-    require_once 'functions.inc.php';
+    // Running error handles and user signup
+    $login->loginUser();
 
-    // If any input fields are empty redirect user to login page with an error attached to the url
-    if (emptyInputLogin($username, $pwd) !== false) {
-        header("location: ../login.php?error=emptyinput");
-        exit(); // Stops the script from running
-    }
-    loginUser($conn, $username, $pwd);
-}
-    else {
-        header("location: ../login.php");
-        exit(); // Stops the script from running
+    // Return user to front page if no errors
+    header("location: ../index.php?error=none");
+
 }

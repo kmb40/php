@@ -29,6 +29,9 @@
                         echo "<li><a href='profile.php'>Profile Page</a></l1>";
                         echo "<li><a href='includes/logout.inc.php'>Log Out</a></l1>";
                     }
+                    else {
+                        echo "<li><a href='#'>Log In</a></l1>";
+                    }
                 ?>
                 </ul>
             </div>
