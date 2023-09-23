@@ -29,10 +29,6 @@
                         echo "<li><a href='profile.php'>Profile Page</a></l1>";
                         echo "<li><a href='includes/logout.inc.php'>Log Out</a></l1>";
                     }
-                    else {// If a session does not exists with a useruid, continue to display sign up and log in options on nav
-                        echo "<li><a href='signup.php'>Sign Up</a></li>";
-                        echo "<li><a href='login.php'>Log In</a></li>";
-                    }
                 ?>
                 </ul>
             </div>
