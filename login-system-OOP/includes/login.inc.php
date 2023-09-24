@@ -1,9 +1,10 @@
 <?php
 
-if (isset($_POST["submit"])) {// Validate if the login form was used to reach this page, if not redirect to login.php page
-
-    $uid = $_POST["uid"];
-    $pwd = $_POST["pwd"];
+#if (isset($_POST["submit"])) {// (This method works also) Validate if the login form was used to reach this page, if not redirect to login.php page
+if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best practice) Validate if the login form was used to reach this page, if not redirect to signup.php page
+{
+    $uid = htmlspecialchars($_POST["uid"], ENT_QUOTES, 'UTF-8'); // htmlspecialchars provides more secure method
+    $pwd = htmlspecialchars($_POST["pwd"], ENT_QUOTES, 'UTF-8'); // htmlspecialchars provides more secure method
    
     // Instantiate loginContr class at signup-contr-classes.php 
     include "../classes/dbh.classes.php"; // Include this file

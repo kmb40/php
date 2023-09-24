@@ -1,12 +1,14 @@
 <?php
 
-if (isset($_POST["submit"])) {// Validate if the login form was used to reach this page, if not redirect to signup.php page
+#if (isset($_POST["submit"])) {// (This method works also) Validate if the login form was used to reach this page, if not redirect to signup.php page
+if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best practice) Validate if the login form was used to reach this page, if not redirect to signup.php page
+{
 
     // Capturing data from signup form on the index page
-    $uid = $_POST["uid"];
-    $pwd = $_POST["pwd"];
-    $pwdRepeat = $_POST["pwdRepeat"];
-    $email = $_POST["email"];
+    $uid = htmlspecialchars($_POST["uid"], ENT_QUOTES, 'UTF-8'); // htmlspecialchars provides more secure method
+    $pwd = htmlspecialchars($_POST["pwd"], ENT_QUOTES, 'UTF-8'); // htmlspecialchars provides more secure method
+    $pwdRepeat = htmlspecialchars($_POST["pwdRepeat"], ENT_QUOTES, 'UTF-8'); // htmlspecialchars provides more secure method
+    $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8'); // htmlspecialchars provides more secure method
 
     // Instantiate SignContr class at signup-contr-classes.php 
     include "../classes/dbh.classes.php"; // Include this file
@@ -16,50 +18,16 @@ if (isset($_POST["submit"])) {// Validate if the login form was used to reach th
 
     // Running error handles and user signup
     $signup->signupUser();
+    
+    $userId = $signup->fetchUserId($uid);
 
-    //require_once 'dba.inc.php';    // Commented out because dbh.classes.php handles the work.
+    // Instantiate ProfileInfoContr class at profileinfo-contr-classes.php 
+    include "../classes/profileinfo.classes.php"; // Include this file
+    include "../classes/profileinfo-contr.classes.php"; //Include this file
+    $profileInfo = new ProfileInfoContr($userId, $uid);
+    $profileInfo->defaultProfileInfo();
 
-    // Error handling and other functions //Commented out because signup-contr-classes.php handles the work.
-    /*
-    require_once 'functions.inc.php'; 
-
-    // If any input fields are empty redirect user to signup page with an error attached to the url
-    if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false ) {
-        header("location: ../signup.php?error=emptyinput");
-        exit(); // Stops the script from running
-    }
-    // If username is invalid redirect to signup page with an error attached
-    if (invalidUid($username) !== false ) {
-        header("location: ../signup.php?error=invaliduid");
-        exit(); // Stops the script from running
-    }
-    // If email is invalid redirect to signup page with an error attached
-    if (invalidEmail($email) !== false ) {
-        header("location: ../signup.php?error=invalidemail");
-        exit(); // Stops the script from running
-    }
-    // If passwords dont match redirect to signup page with an error attached
-    if (pwdMatch($pwd, $pwdRepeat) !== false ) {
-        header("location: ../signup.php?error=passwordsdontmatch");
-        exit(); // Stops the script from running
-    }
-    // If username or email already exists redirect to signup page with an error attached
-    if (uidExists($conn, $username, $email) !== false ) {
-        header("location: ../signup.php?error=usernameormemailtaken");
-        exit(); // Stops the script from running
-    }
-
-    createUser($conn, $name, $email, $username, $pwd);
-
-}
-
-
-else {//Return to index page     
-    header("location: ../index.php");
-    exit(); // Stops the script from running
-*/
-
-// Return user to front page if no errors
-header("location: ../index.php?error=none");
+    // Return user to front page if no errors
+    header("location: ../index.php?error=none");
 
 }

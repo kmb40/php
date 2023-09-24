@@ -22,7 +22,7 @@ class SignupContr extends Signup { //Contains properites aka variables and metho
         $this->email = $email;
     }
 
-    // Create user is all criteria is met
+    // Create user if all criteria is met
     public function signupUser() {
         if($this->emptyInput() == false) {
            // echo "Empty input!"; 
@@ -119,4 +119,10 @@ class SignupContr extends Signup { //Contains properites aka variables and metho
       }
       return $result; // Return "result" value
     }//End of function    
+
+    public function fetchUserId($uid) {
+        $userId = $this->getUserId($uid);
+        return $userId[0]["users_id"];
+    }
+
 }

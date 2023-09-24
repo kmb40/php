@@ -13,7 +13,7 @@ class Signup extends Dbh {// A class which extends/uses the Dbh class
 
         if(!$stmt->execute(array($uid, $email))){// If the sql portion of statement (stmt) fails to execute then return to index page. Used array because there is more than one parameter (uid and email)
             $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
+            header("location: ../index.php?error=stmtfailedcheckUser");
             exit();
         }
 
@@ -41,11 +41,31 @@ class Signup extends Dbh {// A class which extends/uses the Dbh class
 
         if(!$stmt->execute(array($uid, $hashedPwd, $email))){ // If the sql portion of statement (stmt) fails to execute then return to index page. Used array because there is more than one parameter (uid and email)
             $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
+            header("location: ../index.php?error=stmtfailedsetUser");
             exit();
         }
 
         $stmt = null;
     }    
 
+    protected function getUserId($uid) {
+        $stmt = $this->connect()->prepare('SELECT users_id FROM users WHERE users_uid = ?;');
+
+        if(!$stmt->execute(array($uid))) {
+            $stmt = null;
+            header("location: ../profile.php?error=stmtfailedgetUserId");
+            exit();
+        }
+
+        if($stmt->rowCount() == 0) {
+            $stmt = null;
+            header("location: ../profile.php?error=profilenotfound");
+            exit();
+        }
+
+        $profileData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $profileData;
+
+    }
 }
