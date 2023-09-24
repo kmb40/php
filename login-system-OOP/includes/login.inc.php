@@ -16,6 +16,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best prac
     $login->loginUser();
 
     // Return user to front page if no errors
-    header("location: ../index.php?error=none");
+    header("location: ../profile.php?error=none");
 
 }
