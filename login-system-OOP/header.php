@@ -20,7 +20,7 @@
                 <a href="index.php"><img src="img/logo.png" alt="logo"></a>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="discover.php">About Us</a></li>
+                    <li><a href="about.php">About Us</a></li>
                     <li><a href="blog.php">Blog</a></li>
                 
                 <?php
