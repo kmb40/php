@@ -18,20 +18,29 @@
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
 
-            while ($row = mysqli_fetch_assoc($result)) {
-             echo ' <a href="#">
-                      <!-- <div style="background-image: url(img/gallery'.$row["imgFullNameGallery"].');"></div> -->
-                       <img src="img/gallery'.$row["imgFullNameGallery"].'" width="250"; /> 
-                       <h3>'.$row["titleGallery"].'</h3>
-                       <p>'.$row["descGallery"].'</p>
-                    </a>';
-            }
+            echo '<div class="card-deck">';// Step up card deck
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                 echo ' 
+                    <div class="card" style="width: 18rem;">
+                       <!-- <a href="#"> -->
+                          <!-- <div style="background-image: url(img/gallery'.$row["imgFullNameGallery"].');"></div> -->
+                           <img src="img/gallery'.$row["imgFullNameGallery"].'" class="card-img-top" /> 
+                           <div class="card-body">
+                           <h5 class="card-title">'.$row["titleGallery"].'</h5>
+                           <p class="card-text">'.$row["descGallery"].'</p>
+                    <!--  </a> -->
+                      </div>
+                    </div>';
+                }
+
+            echo '</div>';// Step up card deck   
         }
          ?>
      </div>
      <?php 
      if (isset($_SESSION['useruid'])) { // If user is not logged in - user id check - , do not show form
-     echo '<div class="alert alert-dark" role="alert">
+     echo '<br><div class="alert alert-dark" role="alert">
             <div class="gallery-upload">  
                <form action="includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data"> 
                    <input type="text" name="filename" placeholder="File Name...">
