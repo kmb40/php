@@ -30,3 +30,4 @@ Finally and very importantly, reference the Issues and Resolution section of the
  2. [Login System](/docs/login-system.md)
  3. [Login System OOP](/docs/login-system-OOP.md)
  4. [Profile Page](/docs/profile-page.md)
+ 5. [Gallery](/docs/gallery.md)

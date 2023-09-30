@@ -20,10 +20,11 @@
                 <a href="index.php"><img src="img/logo.png" alt="logo"></a>
                 <ul>
                     <li><a href="index.php">Home</a></li>
+                    <li><a href="gallery.php">Gallery</a></li>
                     <li><a href="about.php">About Us</a></li>
                     <li><a href="blog.php">Blog</a></li>
                 
-                <?php
+                <?php 
                     // Illustrate links that reflect logged in vs not logged in
                     if (isset($_SESSION["useruid"])){ // Check if a session exists with a useruid. If so, display profile and log out options on nav
                         echo "<li><a href='profile.php'>Profile Page</a></l1>";
@@ -31,7 +32,7 @@
                         echo "<li><a href='includes/logout.inc.php'>Log Out</a></l1>";
                     }
                     else {
-                        echo "<li><a href='#'>Log In</a></l1>";
+                        echo "<li><a href='index.php'>Log In</a></l1>";
                     }
                 ?>
                 </ul>
