@@ -4,11 +4,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best prac
 {
 
     $newFileName = $_POST['filename']; // Set submitted name to variable
+    
     if (empty($newFileName)) { // If no data is submitted name the file "gallery"
         $newFileName = "gallery";
     } else {
         $newFileName = strtolower(str_replace(" ", "-", $newFileName)); // replace spaces with a - and make name lowercase
     }
+
     $imageTitle = $_POST['filetitle']; // Set submitted title to variable
     $imageDesc = $_POST['filedesc']; // Set submitted description to variable
 
@@ -32,7 +34,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best prac
     $allowed = array("jpg","jpeg","png"); // Assign these extensions to variable
 
     if(in_array($fileActualExt, $allowed)) { // If file has accepted extension 
+
         if($fileError === 0) { // 0 means there are no errors
+
             if($fileSize < 2000000) { // If file is less than 2? state this message
               $imageFullName = $newFileName . "." . uniqid("", true) . "." . $fileActualExt; // On succesful upload if criteria are met create random name
               $fileDestination = "../img/gallery" . $imageFullName; // File destination
@@ -45,6 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best prac
               } else { // If these is not empty, return to upload page with error
                 $sql = "SELECT * FROM gallery;";
                 $stmt = mysqli_stmt_init($conn); // Set up prepared statement
+
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo "SQL Statement failed";
                 } else {
@@ -67,7 +72,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best prac
                 }
                 }
               }
-                
 
             } else {
                 echo "File size is too big!";
@@ -82,8 +86,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") // (This method is considered best prac
         echo "You need to upload a proper file type!";
         exit();
     }
-
 }
-
-
 ?>
