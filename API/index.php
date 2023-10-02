@@ -26,7 +26,7 @@ $response = array();// Declare an array to hold results.
             $response[$i]['orderGallery'] = $row ['orderGallery'];
             $i++; //Plus one to variable
         }
-        echo json_encode($response,JSON_PRETTY_PRINT);
+        echo json_encode($response,JSON_PRETTY_PRINT); // Place in common format
     }
 
  } else {
