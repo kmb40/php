@@ -33,3 +33,4 @@ Finally and very importantly, reference the Issues and Resolution section of the
  5. [Gallery](/docs/gallery.md)
  6. [API](/docs/api.md)
  7. [Advanced API](/docs/advanced-api.md)
+ 8. [GD](/docs/gd.md)
