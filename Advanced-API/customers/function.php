@@ -150,6 +150,63 @@ function getCustomer($customerParams){ // Create an indivudual customer function
            header("HTTP/1.0 500 Internal Server Error");
            return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display failure message  
     }
-  }
+}
+
+function updateCustomer($customerInput, $customerParams) { // Customer input function
+
+    global $conn; // Declare dccon.php variable global
+
+    if(!isset($customerParams['id'])) { // If customer id isnt found
+
+        return error422 ('customer id not found in the URL');
+    } elseif($customerParams['id'] == null  ) {
+
+        return error422 ('Enter the customer id');
+    }
+
+    $customerId = mysqli_real_escape_string($conn, $customerParams['id']);
+
+    $name = mysqli_real_escape_string($conn, $customerInput['name']);
+    $email = mysqli_real_escape_string($conn, $customerInput['email']);
+    $adsense = mysqli_real_escape_string($conn, $customerInput['adsense']);
+
+    // Error handling
+    if(empty(trim($name))) {
+
+        return error422 ('Enter your name');
+    } elseif (empty(trim($email))) {
+        # code...
+        return error422 ('Enter your email');
+    } elseif (empty(trim($adsense))) {
+        # code...
+        return error422 ('Enter your adsense');
+    } else {
+
+        $query = "UPDATE tbl_users SET fld_firstname='$name', fld_email='$email', fld_adsense='$adsense' WHERE fld_id='$customerId' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+    
+        if($result) {
+
+            $data = [
+                'status' => 200,
+                'message' => 'Customer Updated Succesfully',
+           ];
+           header("HTTP/1.0 200 Success");
+           return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display success message 
+
+        } else {
+
+            $data = [
+                'status' => 500,
+                'message' => 'Internal Server Error',
+           ];
+           header("HTTP/1.0 500 Internal Server Error");
+           return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display failure message  
+
+        }
+
+    }
+
+}
 
 ?>
