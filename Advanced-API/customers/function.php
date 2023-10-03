@@ -209,4 +209,42 @@ function updateCustomer($customerInput, $customerParams) { // Customer input fun
 
 }
 
+function deleteCustomer($customerParams) {
+
+    global $conn; // Declare dccon.php variable global
+
+    if(!isset($customerParams['id'])) { // If customer id isnt found
+
+        return error422 ('customer id not found in the URL');
+    } elseif($customerParams['id'] == null  ) { // If the id is to empty
+
+        return error422 ('Enter the customer id');
+    }
+
+    $customerId = mysqli_real_escape_string($conn, $customerParams['id']);
+
+    $query = "DELETE FROM tbl_users WHERE fld_id = '$customerId' LIMIT 1"; // fld_firstname='$name', fld_email='$email', fld_adsense='$adsense' WHERE fld_id='$customerId' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+
+    if($result) {
+    // Throw a 404 error to the user in JSON
+    $data = [
+        'status' => 200,
+        'message' => 'Customer Deleted Successfully',
+    ];
+    header("HTTP/1.0 200 Ok");
+    echo json_encode($data, JSON_PRETTY_PRINT); 
+
+    } else {
+
+    // Throw a 404 error to the user in JSON
+    $data = [
+        'status' => 404,
+        'message' => 'Customer Not Found',
+    ];
+    header("HTTP/1.0 404 Customer Not Found");
+    echo json_encode($data, JSON_PRETTY_PRINT); 
+    }
+}
+
 ?>
