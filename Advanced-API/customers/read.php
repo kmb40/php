@@ -12,10 +12,19 @@ include('function.php');
 
 $requestMethod = $_SERVER["REQUEST_METHOD"]; // Determines requestors request type (post,get,etc)
 
-    if($requestMethod == "GET") {
 
-        $customerList = getCustomerList();
-        echo $customerList;
+    if($requestMethod == "GET") { // If request if of type GET
+
+        if(isset($_GET['id'])) { // If a a customer id is provided
+
+            $customer = getCustomer($_GET); // Set variable customer to function getCustomer
+            echo $customer; // Display customer
+
+        } else {
+
+            $customerList = getCustomerList(); // Set variable customerList to function getCustomerList
+            echo $customerList; // Display customerList
+        }
 
 } else {
 

@@ -39,10 +39,10 @@ function storeCustomer($customerInput) { // Customer input function
         if($result) {
 
             $data = [
-                'status' => 201,
+                'status' => 200,
                 'message' => 'Customer Created Succesfully',
            ];
-           header("HTTP/1.0 201 Created");
+           header("HTTP/1.0 200 Created");
            return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display success message 
 
         } else {
@@ -60,7 +60,7 @@ function storeCustomer($customerInput) { // Customer input function
 
 }
 
-function getCustomerList() { // Create a customer list funciton. Altered for quikstarts users
+function getCustomerList() { // Create a complete customer list funciton which returns all cutomers. Altered to return quikstarts users
 
     global $conn; // Declare dccon.php variable global
 
@@ -103,5 +103,53 @@ function getCustomerList() { // Create a customer list funciton. Altered for qui
 
     }
 }
+
+function getCustomer($customerParams){ // Create an indivudual customer function which returns a single cutomers. Altered to return a single quikstarts
+    
+    global $conn; // Declare dccon.php variable global
+
+    // Error handling
+    if($customerParams['id'] ==  null) { // If varible customerParams is empty
+
+        return error422 ('Enter your customer id'); // Rund error hadnling function
+    }
+
+    $customerID = mysqli_real_escape_string($conn, $customerParams['id']); // establish db connection, look up customer id and remove any special characters from customer id
+
+    $query = "SELECT * FROM tbl_users WHERE fld_id = '$customerID' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+
+    if($result) {
+
+        if(mysqli_num_rows($result) == 1){
+
+            $res = mysqli_fetch_assoc($result);
+            $data = [
+                'status' => 200,
+                'message' => 'Customer Fetched Successfully',
+                'data' => $res
+           ];
+           header("HTTP/1.0 200 Ok");
+           return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display failure message 
+
+        } else { // If the msqli_query fails, the display this error
+
+            $data = [
+                 'status' => 404,
+                 'message' => 'No Customer Found',
+            ];
+            header("HTTP/1.0 404 No Customer Found");
+            return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display failure message  
+        }
+    } else {// If the msqli_query fails, the display this error
+
+            $data = [
+                'status' => 500,
+                'message' => 'Internal Server Error',
+           ];
+           header("HTTP/1.0 500 Internal Server Error");
+           return json_encode($data, JSON_PRETTY_PRINT);  // Print / Display failure message  
+    }
+  }
 
 ?>
