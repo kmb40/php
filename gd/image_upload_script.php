@@ -8,8 +8,11 @@ $fileTmpLoc = $_FILES["uploaded_file"]["tmp_name"]; // The file in the PHP tmp f
 $fileType = $_FILES["uploaded_file"]["type"]; // The file type
 $fileSize = $_FILES["uploaded_file"]["size"]; // The file size in bytes
 $fileErrorMsg = $_FILES["uploaded_file"]["error"]; // 0 is false, 1 is true
+#$fileName = preg_replace('#[^a-z.0-9]#i','',$fileName);// OPTIONAL - Filter the filename of anything but numbers or letters
 $kaboom = explode(".",$fileName); // Split the file name into an array using the dot as a deliminator 
 $fileExt = $kaboom[1]; // Target the second array element [1] to get he file extension 
+#$fileName = time().rand().''.''.$fileExt;// OPTIONAL - Provide a unique random filename using the time and random number
+#$fileTypeTrue = mime_content_type($_FILES["uploaded_file"]["tmp_name"]); // Determine true file type
 
 //Start PHP Image Upload Error Handling
 if(!$fileTmpLoc) {// If file is not choosen
@@ -42,18 +45,42 @@ if($moveResult != true) {
 }
 unlink($fileTmpLoc); // Remove the uploaded file from the PHP temp folder
 
-//Resizing
+//Include functions
 include_once("ak_php_img_lib.php"); // Contains resizing function
+
+//Resizing
 $target_file = "uploads/$fileName"; // Uploaded file to be resized
 $resized_file = "uploads/resized_$fileName"; // The name that the resized file to take
-$wmax = 200; // Width
-$hmax = 150; // Height
+$wmax = 200; // Width boundary
+$hmax = 150; // Height boundary
 ak_img_resize($target_file, $resized_file, $wmax, $hmax, $fileExt); // Resize function called in ak_php_img_lib
+
+//Thumbnail
+// Be advised that there appear to be issues when creating thumbnails for transparent png and gif files
+$target_file = "uploads/resized_$fileName"; // Uploaded resized file to be thumbed
+$thumbnail = "uploads/thumb_$fileName"; // The name that the thumbed file
+$wthumb = 150; // Width boundary
+$hthumb = 150; // Height boundary
+if ($fileExt == "gif" || $fileExt == "png"){ // This condition sources the original instead of the resized image. The resized image causes the imagecreatefrompng and imagecreatefromgif to fail like due to size
+    $target_file = "uploads/".$fileName;
+    ak_img_thumb($target_file, $thumbnail, $wthumb, $hthumb, $fileExt);
+} else {
+    ak_img_thumb($target_file, $thumbnail, $wthumb, $hthumb, $fileExt);
+}
+
+//Convert non jpg to jpg
+if(strtolower($fileExt) != "jpg") {
+    // This could be used prior to the thumbnail function which fails for transparent files of a certain size. E.g. If gif or png, convert to jpg then thumbnail
+    echo "This aint no jpg yo! We are going to convert so that a thumbnail can be created.";
+    $target_file = "uploads/".$fileName; // This sources the original instead of the resized image. The resized image causes the imagecreatefrompng and imagecreatefromgif to fail like due to size
+    $new_jpg = "uploads/".$kaboom[0].".jpg";
+    ak_img_convert_to_jpg($target_file, $new_jpg, $fileExt);
+
+}
 
 // Display things to the page so you can see what is happening for testing purposes
 echo "The file named <strong>$fileName</strong> uploaded successfully.<br/><br/>";
 echo "It is <strong>$fileSize</strong> bytes in size.<br/><br/>";
 echo "It is an <strong>$fileType</strong> type of file.<br/><br/>";
 echo "The file extension is <strong>$fileExt</strong>.<br/><br/>";
-
 ?>
