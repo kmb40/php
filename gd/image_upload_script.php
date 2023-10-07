@@ -78,6 +78,13 @@ if(strtolower($fileExt) != "jpg") {
 
 }
 
+// Watermark feature
+# Needs to be run AFTER jpg conversion function
+$target_file = "uploads/".$kaboom[0].".jpg";
+$wtrmrk_file = "watermark.png";
+$new_file = "uploads/protected_".$kaboom[0].".jpg";
+ak_img_watermark($target_file, $wtrmrk_file, $new_file);
+
 // Display things to the page so you can see what is happening for testing purposes
 echo "The file named <strong>$fileName</strong> uploaded successfully.<br/><br/>";
 echo "It is <strong>$fileSize</strong> bytes in size.<br/><br/>";
