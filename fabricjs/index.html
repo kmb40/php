@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Hello</h1>
 
-    <button onclick='toggleMode(modes.pan)'>Toggle Pan</button>
-    <button onclick='toggleMode(modes.drawing)'>Toggle Drawing</button>
+    <button onclick='toggleMode(modes.pan)'>Toggle Pan</button> <!-- Toggle button for panning -->
+    <button onclick='toggleMode(modes.drawing)'>Toggle Drawing</button> <!-- Toggle button for drawing -->
+    <input id='colorPicker' value="000000" data-jscolor=""><!-- Color picker -->
+    <button onclick="clearCanvas(canvas)">Clear</button> <!-- Clear button for canvas. Useful when multiple canvases are present-->
 
     <!-- Sets ID of canvase-->
     <canvas id="canvas"></canvas>
@@ -17,6 +20,7 @@
     <!-- Calls scripts AFTER DOM loads-->
     <script src="/lib/fabric.min.js"></script>
     <script src="index.js"></script>
+    <script src="/lib/jscolor.js"></script>
 
 </body>
 </html>

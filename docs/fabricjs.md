@@ -17,6 +17,8 @@
   }
 ```
 
+### Color Picker
+- Added [jscolor picker](https://jscolor.com/)
 
 ### Issues
 #### Issue

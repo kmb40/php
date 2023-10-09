@@ -51,12 +51,15 @@ const toggleMode = (mode) => {
             canvas.renderAll()
         } else {
             // Start Handles Fancy Brush
+            /*
             canvas.freeDrawingBrush = new fabric.SprayBrush(canvas) // Set Brush Type
             canvas.freeDrawingBrush.color = 'red' // Set brush color BaseBrush
             canvas.freeDrawingBrush.width = 15 // Set brush width BaseBrush
+            */
             // End Handles Fancy Brush
 
             currentMode = modes.drawing
+            canvas.freeDrawingBrush.color = color
             canvas.isDrawingMode = true
             canvas.renderAll()
         }
@@ -97,11 +100,34 @@ const setPanEvents = (canvas) => {
     })
 }
 
+// Color listener function. Update color var and brush color when color is changed
+const setColorListener = () => {
+    const picker = document.getElementById ('colorPicker')
+    picker.addEventListener('change', (event) => {
+        console.log(event.target.value)
+        color = event.target.value // '#' + was not needed before event.target.value. It in fact caused an the color not to change
+        canvas.freeDrawingBrush.color =  color
+        canvas.renderAll()
+    })
+}
+// Clear canvas function
+const clearCanvas = (canvas) => {
+    canvas.getObjects().forEach((o) => { // Loads all objects into an array
+        if(o !== canvas.backgroundImage) { // Removes everything from the array except the background image
+            canvas.remove(o)
+        }
+    })
+
+}
+
+
 // Call function to draw canvas
-const canvas = initCanvas('canvas');
-let mousePressed = false;
+const canvas = initCanvas('canvas')
+let mousePressed = false
+let color = '#000000'
 
 let currentMode;
+
 const modes = {
     pan: 'pan',
     drawing: 'drawing'
@@ -112,3 +138,5 @@ setBackground('https://placehold.co/500x500', canvas);
 //https://www.agrimaccari.com/en/wp-content/uploads/2015/05/girl-500x500.jpg
 
 setPanEvents(canvas) // Call pan handling. No pun intended
+
+setColorListener() // Call color listener
