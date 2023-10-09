@@ -20,12 +20,20 @@ function ak_img_resize($target, $newcopy, $w, $h, $ext) {
     } else { // If ext is gif then create jpeg
         $img = imagecreatefromjpeg($target);
     }
-    $tci = imagecreatetruecolor($w, $h); // Creates a black rectagle with spcified width and height
+    $tci = imagecreatetruecolor($w, $h); // Creates a black rectagle with specified width and height
 
     // Takes 10 parameters - https://www.php.net/manual/en/function.imagecopyresampled.php
     imagecopyresampled($tci, $img, 0,0,0,0, $w, $h, $w_orig, $h_orig); // Copies image
     imagejpeg($tci, $newcopy,80); // Saves the file Imagejpeg outputs gif and png without issue
 }
+
+    // Rotate and save the image
+    function kb_img_rotate($target, $newcopy) {
+    $img = imagecreatefromjpeg($target); // Makes the image jpg
+    $imgRotated = imagerotate($img, 45, 0); // Rotates the image NOTE: -1 sets color to white and throws an error. Used 0.
+    imagejpeg($imgRotated, $newcopy, 80);
+}
+
     // Thumbnail Function
     function ak_img_thumb($target, $newcopy, $w, $h, $ext) {
     list($w_orig, $h_orig) = getimagesize($target); // Pulls the original width and height

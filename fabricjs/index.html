@@ -6,9 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="./lib/fabric.min.js"></script>
+    <h1>Hello</h1>
+
+    <button onclick='toggleMode(modes.pan)'>Toggle Pan</button>
+    <button onclick='toggleMode(modes.drawing)'>Toggle Drawing</button>
+
+    <!-- Sets ID of canvase-->
+    <canvas id="canvas"></canvas>
+
+    <!-- Calls scripts AFTER DOM loads-->
+    <script src="/lib/fabric.min.js"></script>
     <script src="index.js"></script>
-    Hello
-    <canvas id="c"></canvas>
+
 </body>
 </html>

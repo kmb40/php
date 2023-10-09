@@ -55,6 +55,11 @@ $wmax = 200; // Width boundary
 $hmax = 150; // Height boundary
 ak_img_resize($target_file, $resized_file, $wmax, $hmax, $fileExt); // Resize function called in ak_php_img_lib
 
+// Rotate
+$target_file = "uploads/$fileName"; // Uploaded file to be resized
+$rotated_file = "uploads/rotated_$fileName"; // The name that the resized file to take
+kb_img_rotate($target_file, $rotated_file); // Calling function and passign parameters
+
 //Thumbnail
 // Be advised that there appear to be issues when creating thumbnails for transparent png and gif files
 $target_file = "uploads/resized_$fileName"; // Uploaded resized file to be thumbed
