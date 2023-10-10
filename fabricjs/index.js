@@ -129,7 +129,7 @@ const restoreCanvas = (canvas, state, bgUrl) => {
             canvas.add(...objects)
             canvas.requestRenderAll()
         })
-    }
+    } 
 }
 
 // Rectangle Object
@@ -178,6 +178,7 @@ const groupObjects = (canvas, group, shouldGroup) => {
         group.val = new fabric.Group(objects, {cornerColor: 'white'}) // Outline group with white border
         clearCanvas(canvas, svgState)
         canvas.add(group.val)
+        canvas.setActiveObject(group.val) // Added by KMB to highlight objects once grouped
         canvas.requestRenderAll()
     } else { // If Ungroup button which passes the false parameter
         group.val.destroy() // Ungroup objects that are in a group
