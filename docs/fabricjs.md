@@ -16,11 +16,18 @@
     "dev": "lite-server"
   }
 ```
+**Note:** Most issues discovered were related to typos in code.
 
 ### Color Picker
 - Added [jscolor picker](https://jscolor.com/)
 
+### Draw Lines and Arrows
+- Secondary source for lines and arrows - https://www.youtube.com/watch?v=qisBBCae7iE&list=PL-gIJFyHJjykXg776HNz3H7XXzBMSu5mL
+
+
 ### Issues
 #### Issue
+Color Picker would not change color on stage
 
 #### Resolution
+Removed hashtag from function "setColorListener()"

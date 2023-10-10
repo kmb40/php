@@ -6,17 +6,28 @@ let canvas = new fabric.Canvas('canvas', { // Create new canvas
     height: window.innerHeight // Sets for full browser window height
 });
 
-let addingLineBtn = document.getElementById('adding-line-btn'); // Set var for line button
+// Set var for line button
+let addingLineBtn = document.getElementById('adding-line-btn'); 
+let addingLineBtnClicked = false;
 
-addingLineBtn.addEventListener('click', activateAddingLine); // Functon for button click
+// Add event listener for button click for function
+addingLineBtn.addEventListener('click', activateAddingLine); 
 
 // Function to draw, move, and stop drwaing line
 function activateAddingLine() {
-    canvas.on('mouse:down', startAddingLine);
-    canvas.on('mouse:move', startDrawingLine);
-    canvas.on('mouse:up', stopDrawingLine);
+    if(addingLineBtnClicked === false) {
+        addingLineBtnClicked = true;
+        canvas.on('mouse:down', startAddingLine);
+        canvas.on('mouse:move', startDrawingLine);
+        canvas.on('mouse:up', stopDrawingLine);
+    
+        canvas.selection = false;
+        canvas.hoverCursor = 'auto';
 
-    canvas.selection = false;
+        objectSelectability('added-line', false);
+        
+    }
+ 
 }
 let line; // Set Global Var
 let mouseDown = false; // Set initial state
@@ -27,8 +38,10 @@ function startAddingLine (o) { // Creates starting poing of line
     let pointer = canvas.getPointer(o.e); // Locates the cursor
 
     line = new fabric.Line([pointer.x, pointer.y, pointer.x, pointer.y], { // Draw line
+        id: 'added-line',
         stroke: 'red',
-        strokeWidth: 3
+        strokeWidth: 3,
+        selectable: false
     });
    // console.log(pointer.x);
    // console.log(pointer.y);
@@ -51,5 +64,36 @@ function startDrawingLine (o) {
 }
 
 function stopDrawingLine () {
+    line.setCoords(); // Gathers coordinates of a line object on the canvas so that canvas knows where the line is so that it can be selected 
     mouseDown = false;
+}
+
+// Set var for deactivate button
+let deactivateAddiingShapeBtn = document.getElementById('deactivate-adding-shape-btn');
+
+// Add event listener for deactivate button click for function
+deactivateAddiingShapeBtn.addEventListener('click', deactivateAddiingShape);
+
+// Function for deactivating line drawing
+function deactivateAddiingShape() {
+    canvas.off('mouse:down', startAddingLine);
+    canvas.off('mouse:move', startDrawingLine);
+    canvas.off('mouse:up', stopDrawingLine);
+
+    objectSelectability('added-line', true);
+
+    canvas.hoverCursor = 'all-scroll';
+    addingLineBtnClicked = false;
+}
+// Function that controls whether an object is selectable or not
+function objectSelectability (id, value) {
+
+    canvas.getObjects().forEach(o => {
+        if(o.id === id) {
+            o.set({
+                selectable: value
+            });
+        }
+    });
+
 }
