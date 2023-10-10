@@ -10,7 +10,7 @@
 3. Install lite-server with `npm install lite-server`
 4. Add dev to the script section of package.json.
 - The file should contain this snippet.
-```sh
+```json
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "lite-server"

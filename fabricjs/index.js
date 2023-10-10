@@ -111,20 +111,92 @@ const setColorListener = () => {
     })
 }
 // Clear canvas function
-const clearCanvas = (canvas) => {
+const clearCanvas = (canvas, state) => {
+    state.val = canvas.toSVG()
     canvas.getObjects().forEach((o) => { // Loads all objects into an array
         if(o !== canvas.backgroundImage) { // Removes everything from the array except the background image
             canvas.remove(o)
         }
     })
-
+}
+// Restore canvas function
+const restoreCanvas = (canvas, state, bgUrl) => {
+    if(state.val) {
+        //canvas.clearCanvas()
+        fabric.loadSVGFromString(state.val, objects => {
+            console.log(objects)
+            objects = objects.filter(o => o['xlink:href'] !== bgUrl)
+            canvas.add(...objects)
+            canvas.requestRenderAll()
+        })
+    }
 }
 
+// Rectangle Object
+const createRect = (canvas) => {
+    console.log("rect")
+    const canvCenter = canvas.getCenter() // Captures center of object
+    const rect = new fabric.Rect({
+        width: 100,
+        height: 100,
+        fill: 'green', // Sets fill color of object. Set to 'transparent' for empty.
+       // stroke: 'white', // Sets stroke of object
+       // strokeWidth: 5, // Sets stroke width of object
+        left: canvCenter.left, // Sets initial left position of object
+        top: canvCenter.top, // Sets initial top position of object
+        originX: 'center',
+        origninY: 'center',
+        cornerColor: 'white'
+    })
+    canvas.add(rect)
+    canvas.renderAll()
+}
+
+// Circle Object
+const createCirc = (canvas) => {
+    console.log("circ")
+    const canvCenter = canvas.getCenter() // Captures center of object
+    const circle = new fabric.Circle({
+        radius: 50,
+        fill: 'orange', // Sets fill color of object. Set to 'transparent' for empty.
+       // stroke: 'white', // Sets stroke of object
+       // strokeWidth: 5, // Sets stroke width of object
+        left: canvCenter.left, // Sets initial left position of object
+        top: canvCenter.top, // Sets initial top position of object
+        originX: 'center',
+        origninY: 'center',
+        cornerColor: 'white'
+    })
+    canvas.add(circle)
+    canvas.renderAll()
+}
+
+// Object grouping functiopn
+const groupObjects = (canvas, group, shouldGroup) => {
+    if(shouldGroup) { // If Group button which passes the true parameter
+        const objects = canvas.getObjects() // Group objects that are on the canvas
+        group.val = new fabric.Group(objects, {cornerColor: 'white'}) // Outline group with white border
+        clearCanvas(canvas, svgState)
+        canvas.add(group.val)
+        canvas.requestRenderAll()
+    } else { // If Ungroup button which passes the false parameter
+        group.val.destroy() // Ungroup objects that are in a group
+        let oldGroup = group.val.getObjects()
+        clearCanvas(canvas, svgState)
+        //canvas.remove(group.val)
+        canvas.add(...oldGroup)
+        group.val = null
+        canvas.requestRenderAll()
+    }
+}
 
 // Call function to draw canvas
 const canvas = initCanvas('canvas')
+const svgState = {}
 let mousePressed = false
 let color = '#000000'
+const group = {} //creates an empty object and assigns it to the constant variable "group"
+const bgUrl = 'https://placehold.co/500x500'
 
 let currentMode;
 
@@ -134,9 +206,7 @@ const modes = {
 }
 
 // Set image background
-setBackground('https://placehold.co/500x500', canvas);
+setBackground(bgUrl, canvas)
 //https://www.agrimaccari.com/en/wp-content/uploads/2015/05/girl-500x500.jpg
-
 setPanEvents(canvas) // Call pan handling. No pun intended
-
 setColorListener() // Call color listener
