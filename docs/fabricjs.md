@@ -39,4 +39,4 @@ Dev Console (chrome) doesnt log mouse:dblclick events. Tried using fabric.js 4.5
 
 #### Resolution
 Function appears to work despite this fact.
-The Dev Console "device" mode was suppressing the logging of this event. Ref - https://stackoverflow.com/questions/51660145/double-click-not-working-when-chrome-web-inspector-open
+**Time Saver: The Dev Console "device" mode was suppressing the logging of this event. Ref - https://stackoverflow.com/questions/51660145/double-click-not-working-when-chrome-web-inspector-open**
