@@ -38,5 +38,5 @@ Removed hashtag from function "setColorListener()"
 Dev Console (chrome) doesnt log mouse:dblclick events. Tried using fabric.js 4.5.0 since it was used in the lesson. This failed to work
 
 #### Resolution
-Function appears to work despite this fact.
+Function appears to work despite this fact.   
 **Time Saver: The Dev Console "device" mode was suppressing the logging of this event. Ref - https://stackoverflow.com/questions/51660145/double-click-not-working-when-chrome-web-inspector-open**
