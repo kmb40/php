@@ -8,75 +8,7 @@ let canvas = new fabric.Canvas('canvas', { // Create new canvas
 
 // Set var for line button
 let addingLineBtn = document.getElementById('adding-line-btn'); 
-let addingSingleArrowLineBtn = document.getElementById('adding-single-arrow-line-btn');
-
 let addingLineBtnClicked = false;
-let addingSingleLineArrowBtnClicked = false;
-
-let line; // Set Global Var
-let arrowHead1;
-let mouseDown = false; // Set initial state
-
-addingSingleArrowLineBtn.addEventListener('click', activateAddingSingleArrowLine);
-
-function activateAddingSingleArrowLine() {
-    if(addingSingleArrowLineBtn ===  false) {
-        addingSingleArrowLineBtn = true;
-
-        canvas.on({
-            'mouse:down': startAddingSingleArrowLine,
-            'mouse:move': startDrawingSingleArrowLine,
-            'mouse:up': stopDrawingSingleArrowLine
-        });
-
-        canvas.selection = false;
-        canvas.hoverCursor = 'auto';
-
-        objectSelectability(false);
-    }
-}
-
-// Draw single arrow function
-function startAddingSingleArrowLine (o) {
-    mouseDown = true;
-
-    let pointer = canvas.getPointer(o.e); // Locates the cursor
-
-    line = new fabric.Line([pointer.x, pointer.y, pointer.x, pointer.y], { // Draw line
-        id: 'added-single-arrow-line',
-        stroke: 'red',
-        strokeWidth: 3,
-        selectable: false,
-        hasControls: false
-    });
-
-   arrowHead1 = new fabric.Polygon([
-        {x:10, y:10},
-        {x:-20, y:-10},
-        {x:-20, y:10}
-    ], {
-        id: 'arrow-head',
-        stroke: 'red',
-        strokeWidth: 3,
-        fill: 'red',
-        selectable: false,
-        hasControls: false,
-        top: pointer.y,
-        left: pointer.x
-    });
-
-   canvas.add(line, arrowHead1);
-   canvas.requestRenderAll();
-}
-
-function startDrawingSingleArrowLine () {
-    
-}
-
-function stopDrawingSingleArrowLine () {
-    
-}
-
 
 // Add event listener for button click for function
 addingLineBtn.addEventListener('click', activateAddingLine); 
@@ -97,6 +29,8 @@ function activateAddingLine() {
     }
  
 }
+let line; // Set Global Var
+let mouseDown = false; // Set initial state
 
 function startAddingLine (o) { // Creates starting poing of line
     mouseDown = true;
@@ -146,18 +80,20 @@ function deactivateAddiingShape() {
     canvas.off('mouse:move', startDrawingLine);
     canvas.off('mouse:up', stopDrawingLine);
 
-    objectSelectability(true);
+    objectSelectability('added-line', true);
 
     canvas.hoverCursor = 'all-scroll';
     addingLineBtnClicked = false;
 }
 // Function that controls whether an object is selectable or not
-function objectSelectability (value) {
+function objectSelectability (id, value) {
+
     canvas.getObjects().forEach(o => {
-        o.set({
-            selectable: value
-        });
+        if(o.id === id) {
+            o.set({
+                selectable: value
+            });
+        }
     });
 
 }
-
