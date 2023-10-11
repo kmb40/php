@@ -97,3 +97,36 @@ function objectSelectability (id, value) {
     });
 
 }
+
+// When a selected item is double clicked
+canvas.on('mouse:dblclick', addingControlPoints);
+
+// Function for adding points (circles) at the ends of the line 
+function addingControlPoints(o) {
+    console.log('You Double Clicked');
+    let obj = o.target;
+
+    let pointer1 = new fabric.Circle({
+        radius: obj.strokeWidth*3,
+        fill: 'blue',
+        opacity: 0.5,
+        top: obj.y1,
+        left: obj.x1,
+        originX: 'center',
+        originY: 'center'
+    });
+
+    let pointer2 = new fabric.Circle({
+        radius: obj.strokeWidth*3,
+        fill: 'blue',
+        opacity: 0.5,
+        top: obj.y2,
+        left: obj.x2,
+        originX: 'center',
+        originY: 'center'
+    });
+
+    canvas.add(pointer1, pointer2);
+    canvas.requestRenderAll();
+
+}
