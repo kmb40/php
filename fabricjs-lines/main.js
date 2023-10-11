@@ -11,17 +11,17 @@ let addingLineBtn = document.getElementById('adding-line-btn');
 let addingSingleArrowLineBtn = document.getElementById('adding-single-arrow-line-btn');
 
 let addingLineBtnClicked = false;
-let addingSingleLineArrowBtnClicked = false;
+let addingSingleArrowLineBtnClicked = false;
 
 let line; // Set Global Var
-let arrowHead1;
+let arrowHead1; // Set Global Var
 let mouseDown = false; // Set initial state
 
 addingSingleArrowLineBtn.addEventListener('click', activateAddingSingleArrowLine);
 
 function activateAddingSingleArrowLine() {
-    if(addingSingleArrowLineBtn ===  false) {
-        addingSingleArrowLineBtn = true;
+    if(addingSingleArrowLineBtnClicked ===  false) {
+        addingSingleArrowLineBtnClicked = true;
 
         canvas.on({
             'mouse:down': startAddingSingleArrowLine,
@@ -50,8 +50,9 @@ function startAddingSingleArrowLine (o) {
         hasControls: false
     });
 
+    // Controls arrow head
    arrowHead1 = new fabric.Polygon([
-        {x:10, y:10},
+        {x:0, y:0},
         {x:-20, y:-10},
         {x:-20, y:10}
     ], {
@@ -62,19 +63,91 @@ function startAddingSingleArrowLine (o) {
         selectable: false,
         hasControls: false,
         top: pointer.y,
-        left: pointer.x
+        left: pointer.x,
+        originX: 'center',
+        originY: 'center'
     });
 
    canvas.add(line, arrowHead1);
    canvas.requestRenderAll();
 }
 
-function startDrawingSingleArrowLine () {
+function startDrawingSingleArrowLine (o) {
+    // Arrow drawing geometry logic detailed
+    // https://youtu.be/tGycvFh723U?list=PL-gIJFyHJjykXg776HNz3H7XXzBMSu5mL&t=187
+
+    if (mouseDown === true) { // Only draw when mouse down 
+        let pointer = canvas.getPointer(o.e); // Locates the cursor coordinates
     
+        line.set({  // Set to the starting position when mousedown
+            x2: pointer.x,
+            y2: pointer.y
+        });
+    
+        arrowHead1.set({ // Make the arrow head follow the cursor
+            left: pointer.x,
+            top: pointer.y,
+        });
+
+        // Find vertical and horizontal heights
+        let x1 = line.x1; // Set line horizontal location
+        let y1 = line.y1; // Set line vertical location
+        let x2 = pointer.x; // Set cursor horizontal location
+        let y2 = pointer.y; // Set cursor vertical location
+
+        let verticalHeight = Math.abs(y2-y1);
+        let horizontalWidth = Math.abs(x2-x1);
+
+        let tanRatio = verticalHeight/horizontalWidth;
+        let basicAngle = Math.atan(tanRatio)*180/Math.PI;
+
+        if(x2>x1) {
+            if(y2<y1) {
+                arrowHead1.set({ // Make the arrow head angle adjust to the cursor
+                    angle: -basicAngle
+                });
+            }
+            else if(y2 === y1) {
+                arrowHead1.set({ // Make the arrow head angle adjust to the cursor
+                    angle: 0
+                });
+            }
+            else if(y2>y1) {
+                arrowHead1.set({ // Make the arrow head angle adjust to the cursor
+                    angle: basicAngle
+                });
+            }
+        }
+
+        else if(x2<x1) {
+            if(y2>y1) {
+                arrowHead1.set({ // Make the arrow head angle adjust to the cursor
+                    angle: 180-basicAngle
+                });
+            }
+            else if(y2 === y1) {
+                arrowHead1.set({ // Make the arrow head angle adjust to the cursor
+                    angle: 180
+                });
+            }
+            else if(y2<y1) {
+                arrowHead1.set({ // Make the arrow head angle adjust to the cursor
+                    angle: 180+basicAngle
+                });
+            }
+        }
+
+        //console.log(basicAngle);
+        line.setCoords();
+        arrowHead1.setCoords();
+        canvas.requestRenderAll();
+    
+        }
 }
 
 function stopDrawingSingleArrowLine () {
-    
+    line.setCoords(); // Gathers coordinates of a line object on the canvas so that canvas knows where the line is so that it can be selected 
+    mouseDown = false;
 }
 
 
@@ -151,6 +224,7 @@ function deactivateAddiingShape() {
     canvas.hoverCursor = 'all-scroll';
     addingLineBtnClicked = false;
 }
+
 // Function that controls whether an object is selectable or not
 function objectSelectability (value) {
     canvas.getObjects().forEach(o => {

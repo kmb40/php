@@ -26,6 +26,7 @@
     color: white;
 }
 
+/*
 #adding-line-btn {
     background-color: rgb(102, 18, 18);
 }
@@ -34,6 +35,7 @@
     background-color: rgb(221, 31, 31);
     cursor: pointer;
 }
+*/
 
 #adding-single-arrow-line-btn {
     background-color: rgb(9, 128, 78);
@@ -57,7 +59,7 @@
     position: absolute;
     top: 50px;
     right: 0px;
-    padding: 10px;
+    padding: 1px;
     background-color: rgb(177, 177, 17);
 }
 
@@ -78,5 +80,9 @@
 }
 
 #adding-line-btn {
-    content: url(/images/416_slash.png)
+    content: url(images/416_slash.png)
+}
+
+#adding-single-arrow-line-btn {
+    content: url(images/single-arrow-line.png)
 }
