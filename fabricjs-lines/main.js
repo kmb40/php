@@ -168,7 +168,6 @@ function activateAddingLine() {
         objectSelectability('added-line', false);
         
     }
- 
 }
 
 function startAddingLine (o) { // Creates starting poing of line
@@ -208,16 +207,36 @@ function stopDrawingLine () {
 }
 
 // Set var for deactivate button
-let deactivateAddiingShapeBtn = document.getElementById('deactivate-adding-shape-btn');
+let deactivateAddingShapeBtn = document.getElementById('deactivate-adding-shape-btn');
+
+// Set var for arrow deactivate button
+let deactivateAddingArrowBtn = document.getElementById('deactivate-adding-single-arrow-btn');
 
 // Add event listener for deactivate button click for function
-deactivateAddiingShapeBtn.addEventListener('click', deactivateAddiingShape);
+deactivateAddingShapeBtn.addEventListener('click', deactivateAddingShape);
+
+// Add event listener for arrow deactivate button click for function
+deactivateAddingArrowBtn.addEventListener('click', deactivateAddingArrow);
 
 // Function for deactivating line drawing
-function deactivateAddiingShape() {
+function deactivateAddingShape() {
     canvas.off('mouse:down', startAddingLine);
     canvas.off('mouse:move', startDrawingLine);
     canvas.off('mouse:up', stopDrawingLine);
+
+    objectSelectability(true);
+
+    canvas.hoverCursor = 'all-scroll';
+    addingLineBtnClicked = false;
+}
+
+// Function for deactivating line drawing
+function deactivateAddingArrow() {
+    canvas.off({
+        'mouse:down': startAddingSingleArrowLine,
+        'mouse:move': startDrawingSingleArrowLine,
+        'mouse:up': stopDrawingSingleArrowLine
+    });
 
     objectSelectability(true);
 
