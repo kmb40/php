@@ -35,6 +35,15 @@
     cursor: pointer;
 }
 
+#adding-single-arrow-line-btn {
+    background-color: rgb(9, 128, 78);
+}
+
+#adding-single-arrow-line-btn:hover {
+    background-color: rgb(155, 210, 172);
+    cursor: pointer;
+}
+
 #deactivate-adding-shape-btn {
     background-color: rgb(5, 5, 117);
 }
@@ -42,4 +51,32 @@
 #deactivate-adding-shape-btn:hover {
     background-color: rgb(42, 55, 159);
     cursor: pointer;
+}
+
+#main-shapes-container {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    padding: 10px;
+    background-color: rgb(177, 177, 17);
+}
+
+#secondary-shapes-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.shape-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(177, 17, 17);
+    cursor: pointer;
+}
+
+.shape-btn:hover {
+    border: rgb(148, 148, 148);
+}
+
+#adding-line-btn {
+    content: url(/images/416_slash.png)
 }
