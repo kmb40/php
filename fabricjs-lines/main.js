@@ -146,8 +146,8 @@ function startDrawingSingleArrowLine (o) {
 }
 
 function stopDrawingSingleArrowLine () {
-    line.setCoords(); // Gathers coordinates of a line object on the canvas so that canvas knows where the line is so that it can be selected 
-    mouseDown = false;
+      line.setCoords(); // Gathers coordinates of a line object on the canvas so that canvas knows where the line is so that it can be selected 
+      mouseDown = false;
 }
 
 
@@ -241,7 +241,7 @@ function deactivateAddingArrow() {
     objectSelectability(true);
 
     canvas.hoverCursor = 'all-scroll';
-    addingLineBtnClicked = false;
+    addingSingleArrowLineBtnClicked = false;
 }
 
 // Function that controls whether an object is selectable or not
