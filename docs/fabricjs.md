@@ -22,7 +22,8 @@
 - Added [jscolor picker](https://jscolor.com/)
 
 ### Draw Lines and Arrows
-- Secondary source for lines and arrows - https://www.youtube.com/watch?v=qisBBCae7iE&list=PL-gIJFyHJjykXg776HNz3H7XXzBMSu5mL
+[`fabricjs-lines`](/fabricjs-lines/)
+- Primary source for lines and arrows - https://www.youtube.com/watch?v=qisBBCae7iE&list=PL-gIJFyHJjykXg776HNz3H7XXzBMSu5mL
 
 
 ### Issues
