@@ -25,6 +25,7 @@ const initCanvas = (id) => {
         selection: false
         });
 }
+
 // Canvas background function
 const setBackground = (url, canvas) => {
 
@@ -139,7 +140,9 @@ const createRect = (canvas) => {
     const rect = new fabric.Rect({
         width: 100,
         height: 100,
-        fill: 'green', // Sets fill color of object. Set to 'transparent' for empty.
+        stroke: 'red',
+        strokeWidth: 3,
+        fill: 'transparent', // Sets fill color of object. Set to 'transparent' for empty.
        // stroke: 'white', // Sets stroke of object
        // strokeWidth: 5, // Sets stroke width of object
         left: canvCenter.left, // Sets initial left position of object
@@ -158,7 +161,9 @@ const createCirc = (canvas) => {
     const canvCenter = canvas.getCenter() // Captures center of object
     const circle = new fabric.Circle({
         radius: 50,
-        fill: 'orange', // Sets fill color of object. Set to 'transparent' for empty.
+        stroke: 'red',
+        strokeWidth: 3,
+        fill: 'transparent', // Sets fill color of object. Set to 'transparent' for empty.
        // stroke: 'white', // Sets stroke of object
        // strokeWidth: 5, // Sets stroke width of object
         left: canvCenter.left, // Sets initial left position of object
@@ -170,6 +175,54 @@ const createCirc = (canvas) => {
     canvas.add(circle)
     canvas.renderAll()
 }
+
+// Arrow Object
+const createArrow = (canvas) => {
+    console.log("arrow")
+
+    var site_url = '/img/red-up-right-arrow-16789.svg';
+
+    fabric.loadSVGFromURL(site_url, function(objects) {
+      var group = new fabric.Group(objects, {
+        id: 'arrow',
+        left: canvas.width/2,
+        top: canvas.height/2,
+        width: 100,
+        height: 100,
+        cornerColor: 'white'
+      });
+
+        canvas.add(group);
+        canvas.renderAll();
+    });
+     /*
+      fabric.Image.fromURL(site_url, function(img) {
+        canvas.add(img.set({ left: 400, top: 350, angle: 30 }).scale(0.25));
+      });
+     */ 
+
+     // canvas.add(group);
+     // canvas.renderAll();
+    
+    /*
+    const canvCenter = canvas.getCenter() // Captures center of object
+    const arrow = new fabric.line({
+        strokeWidth: 3,
+        fill: 'red', // Sets fill color of object. Set to 'transparent' for empty.
+       // stroke: 'white', // Sets stroke of object
+       // strokeWidth: 5, // Sets stroke width of object
+        left: canvCenter.left, // Sets initial left position of object
+        top: canvCenter.top, // Sets initial top position of object
+        originX: 'center',
+        origninY: 'center',
+        cornerColor: 'white'
+    })
+    
+    canvas.add(arrow)
+    canvas.renderAll()
+    */
+}
+
 
 // Object grouping functiopn
 const groupObjects = (canvas, group, shouldGroup) => {
@@ -205,6 +258,34 @@ const modes = {
     pan: 'pan',
     drawing: 'drawing'
 }
+
+// Key stroke logging testing
+let x = canvas.width
+let y = canvas.height
+console.log(canvas)
+console.log(x,'is the value of x')
+console.log(y,'is the value of y')
+
+document.addEventListener('keydown', logkey)
+
+function logkey(e) {
+    console.log(e.code)
+    if(e.code === 'Backspace'){
+        deleteObj2();
+    }
+}
+
+//Deleting selected objects
+function deleteObj2() {
+    var active = canvas.getActiveObject()
+    if (active) {
+      canvas.remove(active)
+      if (active.type == "activeSelection") {
+        active.getObjects().forEach(x => canvas.remove(x))
+        canvas.discardActiveObject().renderAll()
+      }
+    }console.log("deleteObj fired");
+  }
 
 // Set image background
 setBackground(bgUrl, canvas)
