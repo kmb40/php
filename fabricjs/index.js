@@ -266,17 +266,21 @@ console.log(canvas)
 console.log(x,'is the value of x')
 console.log(y,'is the value of y')
 
+// Test canvas id
+console.log(initCanvas)
+
+// Caoture if del/backspace keystroke
 document.addEventListener('keydown', logkey)
 
 function logkey(e) {
     console.log(e.code)
     if(e.code === 'Backspace'){
-        deleteObj2();
+        deleteObj();
     }
 }
 
 //Deleting selected objects
-function deleteObj2() {
+function deleteObj() {
     var active = canvas.getActiveObject()
     if (active) {
       canvas.remove(active)
@@ -286,9 +290,32 @@ function deleteObj2() {
       }
     }console.log("deleteObj fired");
   }
+  
+// Pull image into canvas for editing
+function importImage() {
+     console.log("Import Image fired")
+     fabric.Image.fromURL('/img/screenshots-qs.png', function(img) {// Takes three parameters http://fabricjs.com/docs/fabric.Image.html#.fromURL 
+        canvas.insertAt(img, 0);
+     }, {
+        selectable: false // Prevents imported image from being selected / moved
+     })
+}
+
+// Save canvas as image
+function saveCanvas () {
+   const dataURL = canvas.toDataURL({
+       // format: 'png',
+       // quality: 0.8
+       // left: 0,
+       // right: 0,
+       // width: canvas.width,
+       // height: canvas.height
+    });
+    console.log('Save Canvas Fired = ' + dataURL)
+}
 
 // Set image background
-setBackground(bgUrl, canvas)
+//setBackground(bgUrl, canvas) // Commented out to prevent tainted canvas error message due to CORS
 //https://www.agrimaccari.com/en/wp-content/uploads/2015/05/girl-500x500.jpg
 setPanEvents(canvas) // Call pan handling. No pun intended
 setColorListener() // Call color listener
