@@ -33,6 +33,7 @@ EXPOSE 3000
     * In the local environment, login to docker with `docker login -u <docker username>`.
     * Tag the local image `docker tag <local docker image name> <docker username>/<docker repo name>`.
     * Push local image to Docker Hub using `docker push <docker username>/<docker repo name>`.
+7. To remove images use `docker rmi <image id>`. Gather the image ids of all images using `docker images`
 
 **Issue**
 WHen attempting to check docker version - Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
