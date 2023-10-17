@@ -34,4 +34,4 @@ Finally and very importantly, reference the Issues and Resolution section of the
  6. [API](/docs/api.md)
  7. [Advanced API](/docs/advanced-api.md)
  8. [GD](/docs/gd.md)
- 9. [GD](/docs/fabricjs.md)
+ 9. [FabricJS](/docs/fabricjs.md)
