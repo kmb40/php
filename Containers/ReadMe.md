@@ -2,7 +2,8 @@
 **Objective:** Build fundamental instructions for containerizing an application and making it portable to any remote repo or registry.
 
 **Prerequisite:**
-Docker needs to be installed. Docker Desktop serves the need
+Docker needs to be installed. [Docker Desktop](https://www.docker.com/products/docker-desktop/) serves the need.
+**Note:** Docker Desktop must be running in order to use docker at CLI (this includes VSCode).
 
 ##### Images and Containers Explained
 Ref - https://www.knowledgehut.com/blog/devops/docker-vs-container#why-docker-containers-are-useful?%C2%A0 
@@ -32,3 +33,9 @@ EXPOSE 3000
     * In the local environment, login to docker with `docker login -u <docker username>`.
     * Tag the local image `docker tag <local docker image name> <docker username>/<docker repo name>`.
     * Push local image to Docker Hub using `docker push <docker username>/<docker repo name>`.
+
+**Issue**
+WHen attempting to check docker version - Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+**Resolution**
+Make sure Docker Desktop is started.
