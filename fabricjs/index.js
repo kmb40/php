@@ -180,7 +180,7 @@ const createCirc = (canvas) => {
 const createArrow = (canvas) => {
     console.log("arrow")
 
-    var site_url = '/img/red-up-right-arrow-16789.svg';
+    var site_url = 'img/red-up-right-arrow-16789.svg';
 
     fabric.loadSVGFromURL(site_url, function(objects) {
       var group = new fabric.Group(objects, {
@@ -294,7 +294,7 @@ function deleteObj() {
 // Pull image into canvas for editing
 function importImage() {
      console.log("Import Image fired")
-     fabric.Image.fromURL('/img/screenshots-qs.png', function(img) {// Takes three parameters http://fabricjs.com/docs/fabric.Image.html#.fromURL 
+     fabric.Image.fromURL('img/screenshots-qs.png', function(img) {// Takes three parameters http://fabricjs.com/docs/fabric.Image.html#.fromURL 
         canvas.insertAt(img, 0);
      }, {
         selectable: false // Prevents imported image from being selected / moved
@@ -333,7 +333,7 @@ function publishSavedImage(dataURL) {
 }
 
 // Set image background
-//setBackground(bgUrl, canvas) // Commented out to prevent tainted canvas error message due to CORS
+// setBackground(bgUrl, canvas) // Commented out to prevent tainted canvas error message due to CORS
 //https://www.agrimaccari.com/en/wp-content/uploads/2015/05/girl-500x500.jpg
 setPanEvents(canvas) // Call pan handling. No pun intended
 setColorListener() // Call color listener
