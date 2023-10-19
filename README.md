@@ -17,7 +17,7 @@ These are the tools used to conduct this research and development.
 2. Installed PHP - **Verison 8.2** - using homebrew using instructions at https://www.php.net/manual/en/install.macosx.packages.php 
 3. Installed VsCode extenions referenced at https://www.youtube.com/watch?v=zT6QrGIfXaU 
 4. Installed MAMP (https://www.mamp.info/en/mamp/mac/) for the mySQL database **Version 5.3.79**. This could have been used for PHP as well instead of installing PHP in step 2.
-5. Because this codebase is 17 years old, I installed a php switcher to make refactoring and testing more efficient. Use ` brew install brew-php-switcher`, then switch versions using `brew-php-switcher 5.4`.   
+5. I installed a php switcher to make refactoring and testing more efficient. Use ` brew install brew-php-switcher`, then switch versions using `brew-php-switcher 5.4`.   
 **Note:** PHP Switcher can only handle arguments of: 5.6 7.0 7.1 7.2 7.3 7.4 8.0 8.1   
 [Ref](https://stackoverflow.com/questions/34909101/how-can-i-easily-switch-between-php-versions-on-mac-osx)
 
