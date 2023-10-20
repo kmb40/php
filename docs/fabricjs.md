@@ -3,12 +3,15 @@
 ## Resources
 - Primary source - https://www.youtube.com/watch?v=mghXNWvVGTs&t
 
+**Note:** Perform work from within the directory of tasks.
+
 1. Setup file structure.
 - index.html
 - index.js
 2. Install package json using `npm init`. This creates a package.json file.
 3. Install lite-server with `npm install lite-server`
 4. Add dev to the script section of package.json.
+5. `npm run dev` to start nodejs server.
 - The file should contain this snippet.
 ```json
   "scripts": {
