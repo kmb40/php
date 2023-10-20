@@ -294,11 +294,22 @@ function deleteObj() {
 // Pull image into canvas for editing
 function importImage() {
      console.log("Import Image fired")
+     //console.log(phpecho)
      fabric.Image.fromURL('img/screenshots-qs.png', function(img) {// Takes three parameters http://fabricjs.com/docs/fabric.Image.html#.fromURL 
         canvas.insertAt(img, 0);
      }, {
         selectable: false // Prevents imported image from being selected / moved
      })
+}
+
+// Pull image into canvas from upload function
+function uploadImage() {
+    console.log("Import Image fired")
+    fabric.Image.fromURL('img/screenshots-qs.png', function(img) {// Takes three parameters http://fabricjs.com/docs/fabric.Image.html#.fromURL 
+       canvas.insertAt(img, 0);
+    }, {
+       selectable: false // Prevents imported image from being selected / moved
+    })
 }
 
 // Save canvas as image
