@@ -1,6 +1,7 @@
 <?php
 
-    include_once 'db.Class.php';
+    include_once 'db.inc.php';
+    include_once 'user.inc.php';
 
 ?>
 
@@ -15,8 +16,14 @@
     <?php
 
     # print_r(PDO::getAvailableDrivers()); // Print out database drivers installed.
-    $object = new Dbh;
-    $object->connect();
+    $object = new User;
+    echo "All Users:<br>";
+    echo $object->getAllUsers();
+
+    echo "<br>";
+
+    echo "<br>Certain Users:<br>";
+    echo $object->getUsersWithCountCheck();
 
     ?>
 </body>
