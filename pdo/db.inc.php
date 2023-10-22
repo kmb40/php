@@ -11,10 +11,19 @@ class Dbh {
 
     // Method
     public function connect(){
+        /* 
+        // Original
         $this->servername = "localhost:8889";
         $this->username = "root";
         $this->password = "root";
         $this->dbname = "loginsystem";
+        $this->charset = "utf8mb4";
+        */
+
+        $this->servername = "quikstarts.com:3306";
+        $this->username = "quikstar_admin";
+        $this->password = "marquis";
+        $this->dbname = "quikstar_freedom";
         $this->charset = "utf8mb4";
 
         try {
@@ -27,5 +36,13 @@ class Dbh {
         }
     }
 }
+
+/*
+QS Credentials
+$host = "quikstarts.com:3306";
+$username = "quikstar_admin";
+$password = "marquis";
+$dbname = "quikstar_freedom";
+*/
 
 ?>

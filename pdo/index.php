@@ -25,6 +25,8 @@
     echo "<br>Certain Users:<br>";
     echo $object->getUsersWithCountCheck();
 
+    echo "<br>";
+    echo "<br>";
     ?>
 </body>
 </html>
