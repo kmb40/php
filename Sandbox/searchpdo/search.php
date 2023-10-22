@@ -3,11 +3,12 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") { //Request method needs to be of type POST
 
     $userSearch = $_POST["usersearch"];
-    if (is_integer($userSearch) == false) {
+    /*
+    if (is_integer($userSearch) == true) {
         echo "A number is required";
         exit();
     } else {
-
+    */    
     try {
         
         require_once "db.inc.php";
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //Request method needs to be of type
     } catch (PDOException $e) {
         die("Query failed: ". $e->getMessage());
     }
-            }
+    
 } else {
     header("Location: index.php");
 }
@@ -56,9 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //Request method needs to be of type
                 //var_dump($results);
                 
                 foreach($results as $row) {
-                    echo "Userid: ".$row["fld_userid"]."<br>";
-                    echo "Guide Title: ".$row["fld_title"]."<br>";
-                    echo "Publish Date: ".$row["fld_date"]."<br>";
+                    echo "Userid: ".htmlspecialchars($row["fld_userid"])."<br>";
+                    echo "Guide Title: ".htmlspecialchars($row["fld_title"])."<br>";
+                    echo "Publish Date: ".htmlspecialchars($row["fld_date"])."<br>";
                     echo "<br>";
                 }
             }
