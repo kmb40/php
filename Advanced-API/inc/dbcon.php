@@ -1,6 +1,7 @@
 <?php 
 
-$host = "quikstarts.com:3306";
+#$host = "localhost"; // For testing with a local database 
+$host = "quikstarts.com:3306"; // For testing with a remote database
 $username = "quikstar_admin";
 $password = "marquis";
 $dbname = "quikstar_freedom";
