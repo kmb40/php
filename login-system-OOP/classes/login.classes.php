@@ -11,7 +11,7 @@ class Login extends Dbh {// A class which extends/uses the Dbh class
         // Also uses connect() method from Dbh since we extended this class. Then with this connect -> we query the db
         $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ? OR users_email = ?;');
 
-        if(!$stmt->execute(array($uid, $pwd))){ // If the sql portion of statement (stmt) fails to execute then return to index page. Used array because there is more than one parameter (uid and password)
+        if(!$stmt->execute(array($uid, $uid))){ // If the sql portion of statement (stmt) fails to execute then return to index page. Used array because there is more than one parameter (uid and password)
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
             exit();
@@ -51,7 +51,7 @@ class Login extends Dbh {// A class which extends/uses the Dbh class
             // If there are zero results from the db, throw and error then stop
             if($stmt->rowCount() == 0) {
                 $stmt = null;
-                header("location: ../index.php?error=usernotfound");
+                header("location: ../index.php?error=usernotfound2");
                 exit();
             }
 
