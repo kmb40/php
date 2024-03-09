@@ -40,9 +40,9 @@ class Login extends Dbh {// A class which extends/uses the Dbh class
 
         // Check everything where the username in the db is equal to what the user submited OR the users email is equal to what the user submited.
         elseif($checkPwd == true) {
-            $stmt = $this->connect()->prepare('SELECT * FROM users WHERE users_uid = ? OR users_email = ? AND users_pwd = ?;');
+            $stmt = $this->connect()->prepare('SELECT * FROM users WHERE users_uid = ? OR users_email = ?;');
 
-            if(!$stmt->execute(array($uid, $uid, $pwd))){ // If the sql portion of statement (stmt) fails to execute then return to index page. Used array because there is more than one parameter (uid and password)
+            if(!$stmt->execute(array($uid, $uid))){ // If the sql portion of statement (stmt) fails to execute then return to index page. Used array because there is more than one parameter (uid and password)
                 $stmt = null;
                 header("location: ../index.php?error=stmtfailed");
                 exit();
